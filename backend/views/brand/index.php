@@ -19,10 +19,21 @@
             <td><?=$brands->name?></td>
             <td><?=$brands->intro?></td>
             <td><?=$brands->sort?></td>
-            <td><?=$brands->status?></td>
+            <td><?=\backend\models\Brand::$status[$brands->status]?></td>
             <td><?=\yii\bootstrap\Html::img("@web/".$brands->logo,['height'=>60])?></td>
             <td><a href="<?=\yii\helpers\Url::to(['brand/edit','id'=>$brands->id]) ?>" class="btn btn-info">编辑</a> <a
-                        href="<?=\yii\helpers\Url::to(['brand/del','id'=>$brands->id])?>" class="btn btn-danger">删除</a></td>
+                        href="<?=\yii\helpers\Url::to(['brand/del','id'=>$brands->id])?>" class="btn btn-danger">删除</a>
+                <?php
+
+                if ($brands->status==0){
+
+                    echo "<a href='remove?id=$brands->id' class='btn btn-info'>还原</a>";
+                }elseif ($brands->status==1){
+                    echo "<a href='remove?id=$brands->id' class='btn btn-danger'>隐藏</a>";
+                }
+
+
+                ?>
         </tr>
 
     <?php endforeach;?>

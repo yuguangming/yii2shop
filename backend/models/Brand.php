@@ -18,7 +18,7 @@ class Brand extends \yii\db\ActiveRecord
 {
 
     public $imgfile;
-    public static $status=['-1'=>'删除','0'=>'隐藏','1'=>'显示'];
+    public static $status=['0'=>'隐藏','1'=>'显示'];
     /**
      * @inheritdoc
      */

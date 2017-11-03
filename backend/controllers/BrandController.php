@@ -56,6 +56,9 @@ class BrandController extends \yii\web\Controller
                 //和数据库里logo字段绑定
                 $model->logo=$path;
 
+                //提示
+                \Yii::$app->session->setFlash("success","添加成功");
+
                 //保存数据
                 if ($model->save(false)){
                     //跳转
@@ -89,6 +92,7 @@ class BrandController extends \yii\web\Controller
                 //拼装路径
                 $path="images/brand/".uniqid().".".$model->imgfile->extension;
 
+                \Yii::$app->session->setFlash("success","修改成功");
                 //保存图片
                 $model->imgfile->saveAs($path,false);
 
@@ -123,6 +127,23 @@ class BrandController extends \yii\web\Controller
         $model->delete();
 
         return $this->redirect(['brand/index']);
+    }
+
+    public function actionRemove($id)
+    {
+        $model=Brand::findOne($id);
+        if ($model->status==0){
+
+            $model->status=1;
+
+        }elseif ($model->status==1){
+
+            $model->status=0;
+
+        }
+        $model->save();
+
+        return $this->redirect('index');
     }
 
 }
