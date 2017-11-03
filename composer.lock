@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "630d5f1d19e73b0163f900453171fba5",
+    "content-hash": "e3f44e7da36e51031684424a73096418",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -379,6 +379,42 @@
                 "mailer"
             ],
             "time": "2017-09-30T22:39:41+00:00"
+        },
+        {
+            "name": "xj/yii2-uploadify-widget",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xjflyttp/yii2-uploadify-widget.git",
+                "reference": "7cfe047f252d9f938bcd229d3933ab27a0ce00fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/xjflyttp/yii2-uploadify-widget/7cfe047f252d9f938bcd229d3933ab27a0ce00fe.zip",
+                "reference": "7cfe047f252d9f938bcd229d3933ab27a0ce00fe",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "xj\\uploadify\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "xjflyttp",
+                    "email": "xjflyttp@gmail.com"
+                }
+            ],
+            "description": "yii2-uploadify-widget",
+            "time": "2015-09-11T15:27:53+00:00"
         },
         {
             "name": "yiisoft/yii2",
