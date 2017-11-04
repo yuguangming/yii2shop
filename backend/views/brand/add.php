@@ -16,7 +16,7 @@ use xj\uploadify\Uploadify;
         <?= $form->field($model, 'name') ?>
         <?= $form->field($model, 'sort') ?>
         <?= $form->field($model, 'status')->radioList(\backend\models\Brand::$status) ?>
-        <?= $form->field($model,'imgfile')->fileInput()?>
+        <?= $form->field($model,'logo')->widget('manks\FileInput', []);?>
         <?= $form->field($model, 'intro') ?>
     
         <div class="form-group">

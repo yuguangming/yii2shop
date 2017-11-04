@@ -47,4 +47,19 @@ composer global require "fxp/composer-asset-plugin:^1.2.0"
 
 实现品牌列表功能模块
 
+# 文章分类管理需求
+
+创建分类article_category表，字段，分类名称、简介、状态、排序、是否是帮助相关的分类
+
+创建管理article表，字段、文章名称、文章分类id、简介、状态(1=是&0=否)、排序、录入时间
+
+创建内容article_detail表，字段，文章管理id、文章内容
+
+# 遇到的错误
+$_FILE['file']['tmp_name']
+
+# 难点
+文章内容表和文章管理表的关联
+
+2017.11.04
 

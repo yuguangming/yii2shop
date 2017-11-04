@@ -20,7 +20,7 @@
             <td><?=$brands->intro?></td>
             <td><?=$brands->sort?></td>
             <td><?=\backend\models\Brand::$status[$brands->status]?></td>
-            <td><?=\yii\bootstrap\Html::img("@web/".$brands->logo,['height'=>60])?></td>
+            <td><?=\yii\bootstrap\Html::img($brands->image,['height'=>60])?></td>
             <td><a href="<?=\yii\helpers\Url::to(['brand/edit','id'=>$brands->id]) ?>" class="btn btn-info">编辑</a> <a
                         href="<?=\yii\helpers\Url::to(['brand/del','id'=>$brands->id])?>" class="btn btn-danger">删除</a>
                 <?php
