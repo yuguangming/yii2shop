@@ -56,10 +56,23 @@ composer global require "fxp/composer-asset-plugin:^1.2.0"
 创建内容article_detail表，字段，文章管理id、文章内容
 
 # 遇到的错误
-$_FILE['file']['tmp_name']
+七牛云 $_FILE['file']['tmp_name']
 
 # 难点
 文章内容表和文章管理表的关联
 
 2017.11.04
+
+# 商品分类需求
+### 流程
+
+创建商品分类表
+
+商品分类的增删改查
+
+利用yii2 tree_grid创建树形
+
+难点：
+
+树形编辑的回显
 
