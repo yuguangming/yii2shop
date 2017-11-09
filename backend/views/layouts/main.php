@@ -36,13 +36,27 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => '首页', 'url' => ['/article/index']],
+        //['label' => '首页', 'url' => ['/article/index']],
+        [
+            'label'=>'商品管理',
+            'items'=>[
+                ['label'=>'商品列表','url'=>['goods/index']],
+                ['label'=>'添加商品','url'=>['goods/add']],
+                ['label'=>'分类列表','url'=>['goods-category/index']],
+                ['label'=>'添加分类','url'=>['goods-category/add']],
+                ['label'=>'品牌列表','url'=>['brand/index']],
+                ['label'=>'添加品牌','url'=>['brand/add']],
+                ['label'=>'管理员列表','url'=>['admin/index']],
+                ['label'=>'创建管理员','url'=>['admin/add']],
+                ['label'=>'文章管理','url'=>['article/index']],
+            ]
+        ],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => '登录', 'url' => ['/admin/login']];
     } else {
         $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
+            . Html::beginForm(['/admin/logout'], 'post')
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']

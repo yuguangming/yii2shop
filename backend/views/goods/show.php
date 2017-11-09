@@ -1,0 +1,5 @@
+<div>
+    <?=$details->details?>
+</div>
+
+
