@@ -6,11 +6,12 @@
 <div class="col-md-2"><a href="add" class="btn btn-info">添加</a></div>
     <div class="col-md-10">
 
-        <form class="form-inline pull-right">
+        <form class="form-inline pull-right" id="searchForm">
             <input type="text" class="form-control" id="minPrice" name="minPrice" size="8" placeholder="最低价" value="<?=Yii::$app->request->get('minPrice')?>"> -
             <input type="text" class="form-control" id="maxPrice" name="maxPrice"  size="8" placeholder="最高价" value="<?=Yii::$app->request->get('maxPrice')?>">
             <input type="text" class="form-control" id="keyword" name="keyword" placeholder="请输入商品名称或货号" value="<?=Yii::$app->request->get('keyword')?>">
-            <a href="#" class="btn btn-default glyphicon glyphicon-search"></a>
+            <a href="#" class="btn btn-default glyphicon glyphicon-search" onclick="document.getElementById('searchForm').submit();"></a>
+<!--            <input type="submit" value="1" class="btn btn-default glyphicon glyphicon-search">-->
         </form>
 
     </div>
@@ -39,7 +40,7 @@
         <tr>
             <td><?=$models->name?></td>
             <td><?=$models->sn?></td>
-            <td><?=$models->category->name?></td>
+            <td><?=$models->category?></td>
             <td><?=$models->brand->name?></td>
             <td><?=\backend\models\Goods::$isonline[$models->isonline]?></td>
             <td><?=\backend\models\Goods::$status[$models->status]?></td>
@@ -49,9 +50,8 @@
             <td><?=$models->shop_price?></td>
             <td><?=$models->stock?></td>
             <td><?=date('Y-m-d H:i:s',$models->createtime_at)?></td>
-            <td><a href="<?= \yii\helpers\Url::to(['goods/edit','id'=>$models->id]) ?>" class="glyphicon glyphicon-pencil"></a> <a
-                        href="<?=\yii\helpers\Url::to(['goods/del','id'=>$models->id])?>" class="glyphicon glyphicon-trash"></a> <a
-                        href="<?=\yii\helpers\Url::to(['goods/show','id'=>$models->id])?>" class="glyphicon glyphicon-eye-open"></a></td>
+            <td><a href="<?= \yii\helpers\Url::to(['goods/edit','id'=>$models->id]) ?>" class="glyphicon glyphicon-pencil" title="编辑"></a> <a href="<?=\yii\helpers\Url::to(['goods/del','id'=>$models->id])?>" class="glyphicon glyphicon-trash" title="删除"></a> <a
+                        href="<?=\yii\helpers\Url::to(['goods/show','id'=>$models->id])?>" class="glyphicon glyphicon-eye-open" title="查看详情"></a></td>
         </tr>
 
     <?php endforeach;?>

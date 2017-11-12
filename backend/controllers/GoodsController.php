@@ -46,6 +46,7 @@ class GoodsController extends \yii\web\Controller
         }
 
         $count=$query->count();
+     //   echo $count;exit;
 
         $searchFprm=new GoodsSearchForm();
 
@@ -144,17 +145,7 @@ class GoodsController extends \yii\web\Controller
 
 //         echo $photonum;exit;
 
-                    /*for($i=0;$i<$photonum;$i++){
-                        $photo=new GoodsPhoto();
 
-                        $photo->load($request->post());
-                        $photo->goods_id=$model->id;
-
-                        $model->imgFiles[]=$photo->path[$i];
-
-                        $photo->save();
-
-                    }*/
 //var_dump($model->imgFiles);exit;
                     foreach ($model->imgFiles as $imgFile){
                         $goodsPhoto=new GoodsPhoto();
@@ -176,6 +167,8 @@ class GoodsController extends \yii\web\Controller
             }
 
         }
+        $model->isonline=1;
+        $model->status=1;
         //显示视图
         return $this->render('add',['model'=>$model,'cates'=>$cates,'brand'=>$brand,'photo'=>$photo,'content'=>$content]);
     }

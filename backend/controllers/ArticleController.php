@@ -38,25 +38,27 @@ class ArticleController extends \yii\web\Controller
 //            var_dump($request->post());exit;
 
             $article->load($request->post());
-
-            $articleTetail->load($request->post());
-
+            $article->inputtime=time();
 //            var_dump($articleTetail,$article);exit;
 
             //验证数据
             if ($article->validate()){
 
-                //提示
-                \Yii::$app->session->setFlash('success',"添加成功");
+
 
                 //保存数据
-
                 if ($article->save(false)){
 
-//                    var_dump($article->id);exit;
+                    $articleTetail->load($request->post());
+
+                    //var_dump($article->id);exit;
                     $articleTetail->article_id=$article->id;
 
                     $articleTetail->save();
+
+
+                    //提示
+                    \Yii::$app->session->setFlash('success',"添加文章成功");
                     //跳转
                     $this->redirect(['article/index']);
                 }
@@ -71,16 +73,15 @@ class ArticleController extends \yii\web\Controller
     public function actionEdit($id)
     {
         //创建对象
-        //$article = new Article();
-
-        $article=Article::findOne($id);
+        $article = Article::findOne($id);
 
         //创建文章内容对象
-        $articleTetail=new ArticleTetail();
+        $articleTetail=ArticleTetail::find()->where(['article_id'=>$id])->one();
+
 
         $articleCategory=ArticleCategory::find()->all();
         $cate=ArrayHelper::map($articleCategory,'id','name');
-        //$cate=ArrayHelper::map()
+
 
         //创建HTTP请求对象
         $request = \Yii::$app->request;
@@ -88,30 +89,37 @@ class ArticleController extends \yii\web\Controller
         //判断是否是POST提交
         if ($request->isPost){
 
-            $article->load($request->post());
+//            var_dump($request->post());exit;
 
-            $articleTetail->load($request->post());
+            $article->load($request->post());
+            $article->inputtime=time();
+//            var_dump($articleTetail,$article);exit;
 
             //验证数据
             if ($article->validate()){
 
-                $article->inputtime=time();
 
-                //提示
-                \Yii::$app->session->setFlash('success',"添加成功");
 
                 //保存数据
-
                 if ($article->save(false)){
 
+                    $articleTetail->load($request->post());
+
+                    //var_dump($article->id);exit;
                     $articleTetail->article_id=$article->id;
 
                     $articleTetail->save();
+
+
+                    //提示
+                    \Yii::$app->session->setFlash('success',"修改文章成功");
                     //跳转
                     $this->redirect(['article/index']);
                 }
             }
         }
+        //默认选择
+        $article->status=1;
         //显示视图
         return $this->render('add',['article'=>$article,'cate'=>$cate,'articleTetail'=>$articleTetail]);
     }
@@ -126,13 +134,9 @@ class ArticleController extends \yii\web\Controller
 
     public function actionShow($id)
     {
-        $article=Article::findOne($id);
+        $content=ArticleTetail::findOne(["article_id"=>$id]);
 
-        $action=ArticleTetail::findOne(['article_id'=>$id]);
-
-        $action=$action->content;
-
-        return $this->render('show',['article'=>$article,'action'=>$action]);
+        return $this->render('show', ['content' => $content]);
 
 
     }

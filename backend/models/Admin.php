@@ -23,6 +23,7 @@ use yii\web\IdentityInterface;
  */
 class Admin extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    public $role=[];
     public $imgFile;
     /**
      * @inheritdoc
@@ -43,6 +44,7 @@ class Admin extends \yii\db\ActiveRecord implements IdentityInterface
             [['username', 'email'], 'string', 'max' => 30],
             [['password', 'token'], 'string', 'max' => 255],
             [['last_login_ip'], 'string', 'max' => 16],
+            [['role'],'safe'],
         ];
     }
 

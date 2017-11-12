@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\models\Admin;
 
 use backend\models\LoginForm;
+use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 
 class AdminController extends \yii\web\Controller
@@ -20,6 +21,8 @@ class AdminController extends \yii\web\Controller
     {
         $model=new Admin();
 
+        $auth=\Yii::$app->authManager;
+        $role=ArrayHelper::map($auth->getRoles(),'name','description');
 
         //判断是不是POST提交
        $request=\Yii::$app->request;
@@ -41,6 +44,11 @@ class AdminController extends \yii\web\Controller
                 //保存数据
               if( $model->save()){
 
+//                  var_dump($model->role);exit;
+                     foreach ($model->role as $role1){
+                      $auth->assign($auth->getRole($role1),$model->id);
+                  }
+
                   //跳转
                   $this->redirect(['admin/index']);
               } else{
@@ -51,13 +59,31 @@ class AdminController extends \yii\web\Controller
             }
         }
         //显示视图
-        return $this->render('add',['model'=>$model]);
+        return $this->render('add',['model'=>$model,'role'=>$role]);
 
     }
 
     public function actionEdit($id)
     {
         $model=Admin::findOne($id);
+        //实例化对象
+        $auth=\Yii::$app->authManager;
+        //得到所有角色
+        $role=$auth->getRoles();
+        //转换格式
+        $role=ArrayHelper::map($role,'name','description');
+        //得到这个用户的所有角色
+        $roles=$auth->getRolesByUser($id);
+        //转数组
+        $roles=array_keys($roles);
+
+            //遍历查出来的所有角色
+            foreach ($roles as $r){
+                //赋值给这个属性，用于回显
+                $model->role[]=$r;
+            }
+
+
 
         //判断是不是POST提交
         $request=\Yii::$app->request;
@@ -78,6 +104,14 @@ class AdminController extends \yii\web\Controller
 
                 //保存数据
                 if( $model->save()){
+                    //删除当前用户的角色
+                    $auth->revokeAll($model->id);
+                    if ($model->role){
+                        foreach ($model->role as $role1){
+                            $auth->assign($auth->getRole($role1),$model->id);
+                        }
+                    }
+
 
                     //跳转
                     $this->redirect(['admin/index']);
@@ -89,13 +123,16 @@ class AdminController extends \yii\web\Controller
             }
         }
         //显示视图
-        return $this->render('add',['model'=>$model]);
+        return $this->render('add',['model'=>$model,'role'=>$role]);
 
     }
 
     public function actionDel($id){
         $model=Admin::findOne($id);
         $model->delete();
+        //删除角色
+        $auth=\Yii::$app->authManager;
+        $auth->revokeAll($model->id);
 
         return $this->redirect(['admin/index']);
     }

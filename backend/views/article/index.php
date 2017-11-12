@@ -23,9 +23,9 @@
             <td><?=\backend\models\Article::$status[$articles->status]?></td>
             <td><?=$articles->sort?></td>
             <td><?=date('Y-m-d H:i:s',$articles->inputtime)?></td>
-            <td><a href="<?=\yii\helpers\Url::to(['edit','id'=>$articles->id])?>" class="btn btn-info">编辑</a> <a
-                        href="<?=\yii\helpers\Url::to(['del','id'=>$articles->id])?>" class="btn btn-danger">删除</a><a
-                        href="<?=\yii\helpers\Url::to(['show','id'=>$articles->id])?>" class="btn btn-info">查看详情</a></td>
+            <td><a href="<?=\yii\helpers\Url::to(['edit','id'=>$articles->id])?>" class="glyphicon glyphicon-pencil" title="编辑"></a> <a
+                        href="<?=\yii\helpers\Url::to(['del','id'=>$articles->id])?>" class="glyphicon glyphicon-trash" title="删除"></a> <a
+                        href="<?=\yii\helpers\Url::to(['show','id'=>$articles->id])?>" class="glyphicon glyphicon-eye-open" title="查看详情"></a></td>
         </tr>
 
     <?php endforeach;?>

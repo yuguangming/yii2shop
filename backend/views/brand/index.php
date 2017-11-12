@@ -3,6 +3,7 @@
 ?>
 <h1>品牌列表</h1>
 <a href="add" class="btn btn-info">添加</a>
+<a href="display" class="btn btn-danger" style="float: right">回收站</a>
 <table class="table">
     <tr>
         <th>名称</th>
@@ -21,19 +22,8 @@
             <td><?=$brands->sort?></td>
             <td><?=\backend\models\Brand::$status[$brands->status]?></td>
             <td><?=\yii\bootstrap\Html::img($brands->image,['height'=>60])?></td>
-            <td><a href="<?=\yii\helpers\Url::to(['brand/edit','id'=>$brands->id]) ?>" class="btn btn-info">编辑</a> <a
-                        href="<?=\yii\helpers\Url::to(['brand/del','id'=>$brands->id])?>" class="btn btn-danger">删除</a>
-                <?php
-
-                if ($brands->status==0){
-
-                    echo "<a href='remove?id=$brands->id' class='btn btn-info'>还原</a>";
-                }elseif ($brands->status==1){
-                    echo "<a href='remove?id=$brands->id' class='btn btn-danger'>隐藏</a>";
-                }
-
-
-                ?>
+            <td><a href="<?=\yii\helpers\Url::to(['brand/edit','id'=>$brands->id]) ?>" class="btn btn-info">编辑</a>
+                <a href="<?=\yii\helpers\Url::to(['brand/huishou','id'=>$brands->id])?>" class="btn btn-danger">回收</a>
         </tr>
 
     <?php endforeach;?>

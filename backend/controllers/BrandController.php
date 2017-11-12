@@ -28,7 +28,7 @@ class BrandController extends \yii\web\Controller
                 'totalCount'=>$count
             ]
         );
-        $brand=Brand::find()->limit($page->limit)->offset($page->offset)->all();
+        $brand=Brand::find()->limit($page->limit)->offset($page->offset)->where(['status'=>1])->all();
 
         //显示视图
         return $this->render('index',['brand'=>$brand,'page'=>$page]);
@@ -102,7 +102,7 @@ class BrandController extends \yii\web\Controller
                 //$model->logo=$path;
 
                 //提示
-                \Yii::$app->session->setFlash("success","添加成功");
+                \Yii::$app->session->setFlash("success","修改成功");
 
                 //保存数据
                 if ($model->save(false)){
@@ -129,22 +129,7 @@ class BrandController extends \yii\web\Controller
         return $this->redirect(['brand/index']);
     }
 
-    public function actionRemove($id)
-    {
-        $model=Brand::findOne($id);
-        if ($model->status==0){
 
-            $model->status=1;
-
-        }elseif ($model->status==1){
-
-            $model->status=0;
-
-        }
-        $model->save();
-
-        return $this->redirect('index');
-    }
 
     public function actionUpload()
     {
@@ -194,6 +179,38 @@ class BrandController extends \yii\web\Controller
         ]);
 
         $qiNiu->delete("我姓余.jpg","yuguangming-php");
+    }
+
+    /**
+     * 回收站
+     * @param $id
+     * @return \yii\web\Response
+     */
+    public function actionHuishou($id)
+    {
+        $data=Brand::findOne($id);
+        $data->status=0;
+        $data->save();
+//        var_dump($data);exit();
+
+
+        //跳转
+       return $this->redirect(['brand/index']);
+    }
+    
+    public function actionDisplay(){
+        $display=Brand::find()->where(['status'=>0])->all();
+        return $this->render('recycle',['display'=>$display]);
+    }
+
+    public function actionReduction($id)
+    {
+        $data=Brand::findOne($id);
+        $data->status=1;
+        $data->save();
+//        var_dump($data);exit();
+        //跳转
+        return $this->redirect(['brand/display']);
     }
 
 }

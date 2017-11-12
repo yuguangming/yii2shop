@@ -27,8 +27,9 @@ class ArticleTetail extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content'],'required'],
+
             [['article_id'], 'integer'],
+            [['content'],'required'],
             [['content'], 'string'],
         ];
     }
