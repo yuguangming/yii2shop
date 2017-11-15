@@ -17,7 +17,7 @@ class AdminController extends \yii\web\Controller
         return $this->render('index',['model'=>$model]);
     }
 
-    public function actionAdd()
+    public static function actionAdd()
     {
         $model=new Admin();
 
@@ -168,7 +168,7 @@ class AdminController extends \yii\web\Controller
                         $admin->save();
 
 
-                        return $this->redirect(['index']);
+                        return $this->redirect(['article/index']);
                     }else{
                         $model->addError('password','密码错误');
                     }
