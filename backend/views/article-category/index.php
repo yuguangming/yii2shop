@@ -19,7 +19,7 @@
             <td><?=$articleCategorys->name?></td>
             <td><?=$articleCategorys->intro?></td>
             <td><?=$articleCategorys->sort?></td>
-            <td><?=$articleCategorys->is_help?></td>
+            <td><?=\backend\controllers\AdminController::$help[$articleCategorys->is_help]?></td>
             <td><a href="<?=\yii\helpers\Url::to(['edit','id'=>$articleCategorys->id])?>" class="btn btn-info">编辑</a> <a
                         href="<?=\yii\helpers\Url::to(['del','id'=>$articleCategorys->id])?>" class="btn btn-danger">删除</a></td>
         </tr>
