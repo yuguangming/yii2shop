@@ -17,7 +17,7 @@ class AdminController extends \yii\web\Controller
         return $this->render('index',['model'=>$model]);
     }
 
-    public static function actionAdd()
+    public function actionAdd()
     {
         $model=new Admin();
 
