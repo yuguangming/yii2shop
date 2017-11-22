@@ -108,6 +108,16 @@ class Goods extends \yii\db\ActiveRecord
 
     }
 
+    public function getPhoto()
+    {
+        return $this->hasMany(GoodsPhoto::className(),['goods_id'=>'id']);
+    }
+
+    public function getIntro()
+    {
+        return $this->hasOne(GoodsDetails::className(),['goods_id'=>'id']);
+    }
+
 
 
 
